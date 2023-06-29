@@ -12,15 +12,15 @@ spec:
         app: webapp-mysql
     spec:
       containers:
-      - name: mysql
-        image: mysql:8
-        ports:
-        - containerPort: 3306
-        env:
-        - name: MYSQL_ROOT_PASSWORD
-          value: "root"
-        - name: MYSQL_DATABASE
-          value: "webchat"
+        - name: mysql
+          image: mysql:8
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: "root"
+            - name: MYSQL_DATABASE
+              value: "webchat"
 ---
 apiVersion: v1
 kind: Service
@@ -30,8 +30,8 @@ spec:
   selector:
     app: webapp-mysql
   ports:
-  - port: 3306
-    targetPort: 3306
+    - port: 3306
+      targetPort: 3306
 ---
 apiVersion: apps/v1
 kind: Deployment
@@ -47,27 +47,27 @@ spec:
         app: webapp
     spec:
       containers:
-      - name: webapp
-        image: fabricioveronez/imersao-gpt-webapp:v1
-        ports:
-        - containerPort: 3000
-          name: http
-          protocol: TCP
-        env:
-        - name: DATABASE_URL
-          value: mysql://root:root@webapp-mysql:3306/webchat
-        - name: NEXTAUTH_URL
-          value: http://a8319ee95d7fe42d783ab924aa7c8b36-765495673.us-east-1.elb.amazonaws.com/api/auth
-        - name: NEXTAUTH_SECRET
-          value: "123456"
-        - name: KEYCLOAK_CLIENT_ID
-          value: gpt-webapp
-        - name: KEYCLOAK_CLIENT_SECRET
-          value: 6H5gI5oASmYM74HrwhdPdzVJn6uCmBsP
-        - name: KEYCLOAK_ISSUER
-          value: http://aed6935ab669d403ea1eaec2f2507bb8-869034135.us-east-1.elb.amazonaws.com/realms/master
-        - name: CHATSERVICE_URL
-          value: "chatservice:50051"
+        - name: webapp
+          image: fabricioveronez/imersao-gpt-webapp:v1
+          ports:
+            - containerPort: 3000
+              name: http
+              protocol: TCP
+          env:
+            - name: DATABASE_URL
+              value: mysql://root:root@webapp-mysql:3306/webchat
+            - name: NEXTAUTH_URL
+              value: http://a8319ee95d7fe42d783ab924aa7c8b36-765495673.us-east-1.elb.amazonaws.com/api/auth
+            - name: NEXTAUTH_SECRET
+              value: "123456"
+            - name: KEYCLOAK_CLIENT_ID
+              value: gpt-webapp
+            - name: KEYCLOAK_CLIENT_SECRET
+              value: 6H5gI5oASmYM74HrwhdPdzVJn6uCmBsP
+            - name: KEYCLOAK_ISSUER
+              value: http://aed6935ab669d403ea1eaec2f2507bb8-869034135.us-east-1.elb.amazonaws.com/realms/master
+            - name: CHATSERVICE_URL
+              value: "chatservice:50051"
 ---
 apiVersion: v1
 kind: Service
