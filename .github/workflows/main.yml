@@ -40,8 +40,8 @@ jobs:
       - name: Autenticar o AWS CLI
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          aws-access-key-id: AKIASUUSB2H6JM2DYUXH
-          aws-session-token: 6GMGabv9OFTMjoYD7a3GeJJvhyj7SNnSbSjTFP0v
+          aws-access-key-id: AKIASUUSB2H6E4CD5MYM
+          aws-secret-access-key: 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
           aws-region: us-east-1
         
       - name: Configurar o kubectl
