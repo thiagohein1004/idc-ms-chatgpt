@@ -43,7 +43,7 @@ jobs:
           aws-access-key-id: ${{ secrets.ACCESS_KEY_ID }}
           aws-session-token: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
-        run: echo "Configurar o aws configure"
+        
       - name: Configurar o kubectl
         shell: bash
         run: |
